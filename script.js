@@ -301,3 +301,29 @@ if (reviewForm) {
         reviewForm.reset();
     });
 }
+// ============================================
+// MOBILE REVIEW BELT DUPLICATION
+// Creates a smooth infinite sliding review belt on phones
+// ============================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    const reviewsGrid = document.querySelector('.reviews-grid');
+
+    if (!reviewsGrid) return;
+
+    const enableReviewBelt = () => {
+        if (window.innerWidth <= 768 && !reviewsGrid.classList.contains('belt-ready')) {
+            const cards = Array.from(reviewsGrid.children);
+
+            cards.forEach(card => {
+                const clone = card.cloneNode(true);
+                clone.setAttribute('aria-hidden', 'true');
+                reviewsGrid.appendChild(clone);
+            });
+
+            reviewsGrid.classList.add('belt-ready');
+        }
+    };
+
+    enableReviewBelt();
+});

@@ -2000,3 +2000,360 @@ body.intro-lock {
         font-size: 1.55rem;
     }
 }
+/* ============================================
+   FINAL MOBILE CLEANUP
+   Fixes cramped layout, oversized hero, nav, cards
+   ============================================ */
+
+@media (max-width: 768px) {
+
+    html,
+    body {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .container {
+        width: 100%;
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+    /* Mobile Navbar */
+    .navbar {
+        padding: 12px 0 !important;
+        min-height: auto !important;
+    }
+
+    .navbar-container {
+        padding: 0 22px !important;
+        min-height: 72px;
+    }
+
+    .logo {
+        gap: 12px;
+        align-items: center;
+    }
+
+    .logo img,
+    .nav-logo,
+    .logo-image {
+        width: 58px !important;
+        height: 58px !important;
+        object-fit: contain;
+    }
+
+    .logo h1 {
+        font-size: 1.55rem !important;
+        line-height: 1.05 !important;
+        letter-spacing: 0.5px !important;
+    }
+
+    .logo p {
+        font-size: 0.76rem !important;
+        letter-spacing: 4px !important;
+        margin-top: 2px !important;
+    }
+
+    .hamburger {
+        transform: scale(0.82);
+    }
+
+    .nav-menu {
+        top: 96px !important;
+    }
+
+    /* Hero Section */
+    .hero {
+        min-height: 82vh !important;
+        height: auto !important;
+        padding: 105px 22px 75px !important;
+        display: flex;
+        align-items: center;
+    }
+
+    .hero-content {
+        max-width: 360px !important;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 !important;
+        transform: none !important;
+    }
+
+    .hero-title {
+        font-size: clamp(2.25rem, 11vw, 3.25rem) !important;
+        line-height: 1.05 !important;
+        letter-spacing: 0.2px !important;
+        margin-bottom: 22px !important;
+    }
+
+    .hero-subtitle {
+        font-size: 0.93rem !important;
+        line-height: 1.65 !important;
+        letter-spacing: 0.25px !important;
+        max-width: 320px !important;
+        margin: 0 auto 32px !important;
+    }
+
+    .hero-subtitle br {
+        display: none;
+    }
+
+    .hero-buttons {
+        width: 100%;
+        max-width: 290px;
+        margin: 0 auto;
+        flex-direction: column;
+        gap: 13px;
+    }
+
+    .hero-buttons .btn,
+    .hero .btn {
+        width: 100%;
+        padding: 15px 22px !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* Hero stats / glass box fix */
+    .hero-stats,
+    .hero-highlights,
+    .hero-info-card,
+    .hero-card,
+    .stats-preview {
+        position: relative !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        margin: 32px auto 0 !important;
+        transform: none !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+    }
+
+    .hero-stats {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+    }
+
+    .hero-stats > *,
+    .hero-highlights > *,
+    .stats-preview > * {
+        padding: 22px 18px !important;
+        min-height: auto !important;
+    }
+
+    /* Section spacing */
+    section {
+        scroll-margin-top: 95px;
+    }
+
+    .services,
+    .fleet,
+    .why-choose-us,
+    .statistics,
+    .booking,
+    .contact,
+    .reviews {
+        padding: 78px 0 !important;
+    }
+
+    .section-header {
+        margin-bottom: 44px !important;
+    }
+
+    .section-label {
+        font-size: 0.75rem !important;
+        letter-spacing: 6px !important;
+    }
+
+    .section-header h2 {
+        font-size: 2.45rem !important;
+        line-height: 1.1 !important;
+        margin-bottom: 18px !important;
+    }
+
+    .section-subtitle {
+        font-size: 0.92rem !important;
+        line-height: 1.65 !important;
+        max-width: 330px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .divider {
+        margin-bottom: 26px !important;
+    }
+
+    /* Card layout */
+    .services-grid,
+    .features-grid,
+    .stats-grid,
+    .contact-grid {
+        grid-template-columns: 1fr !important;
+        max-width: 345px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        gap: 26px !important;
+    }
+
+    .service-card,
+    .feature-card,
+    .stat-card,
+    .contact-card {
+        padding: 34px 28px !important;
+        min-height: auto !important;
+        border-radius: 14px !important;
+    }
+
+    .service-icon,
+    .feature-icon,
+    .contact-icon {
+        width: 64px !important;
+        height: 64px !important;
+        font-size: 1.55rem !important;
+        margin-bottom: 22px !important;
+    }
+
+    .service-card h3,
+    .feature-card h3,
+    .contact-card h3,
+    .stat-card h3 {
+        font-size: 1.48rem !important;
+        line-height: 1.18 !important;
+        margin-bottom: 16px !important;
+    }
+
+    .service-card p,
+    .feature-card p,
+    .contact-card p,
+    .stat-card p {
+        font-size: 0.98rem !important;
+        line-height: 1.7 !important;
+    }
+
+    /* Fleet */
+    .fleet-item {
+        grid-template-columns: 1fr !important;
+        gap: 34px !important;
+    }
+
+    .fleet-image {
+        height: 250px !important;
+        border-radius: 14px !important;
+    }
+
+    .fleet-content h3 {
+        font-size: 2rem !important;
+        line-height: 1.1 !important;
+    }
+
+    .fleet-description {
+        font-size: 0.96rem !important;
+        line-height: 1.7 !important;
+    }
+
+    .features-list li {
+        font-size: 0.9rem !important;
+        line-height: 1.5 !important;
+        gap: 12px !important;
+    }
+
+    /* Booking */
+    .booking-wrapper,
+    .booking-form {
+        max-width: 345px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .booking-form {
+        padding: 32px 24px !important;
+        border-radius: 14px !important;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 18px !important;
+        margin-bottom: 18px !important;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        font-size: 0.92rem !important;
+        padding: 14px 15px !important;
+    }
+
+    /* WhatsApp button */
+    .whatsapp-button {
+        width: 58px !important;
+        height: 58px !important;
+        right: 22px !important;
+        bottom: 24px !important;
+        font-size: 1.55rem !important;
+    }
+}
+/* ============================================
+   MOBILE REVIEW BELT / SLIDING CAROUSEL
+   ============================================ */
+
+@media (max-width: 768px) {
+
+    .reviews {
+        overflow: hidden;
+    }
+
+    .reviews-grid {
+        display: flex !important;
+        grid-template-columns: none !important;
+        gap: 18px !important;
+        width: max-content !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        animation: reviewBeltScroll 26s linear infinite;
+        will-change: transform;
+    }
+
+    .reviews-grid:hover {
+        animation-play-state: paused;
+    }
+
+    .review-card {
+        width: 300px !important;
+        min-width: 300px !important;
+        padding: 32px 24px !important;
+        border-radius: 14px !important;
+    }
+
+    .review-card h4 {
+        font-size: 1rem !important;
+    }
+
+    .review-text {
+        font-size: 0.92rem !important;
+        line-height: 1.65 !important;
+    }
+
+    .review-stars {
+        font-size: 0.82rem !important;
+        letter-spacing: 2px !important;
+    }
+
+    @keyframes reviewBeltScroll {
+        0% {
+            transform: translateX(22px);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+}
+
+@media (max-width: 430px) {
+    .review-card {
+        width: 285px !important;
+        min-width: 285px !important;
+    }
+}
