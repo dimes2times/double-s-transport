@@ -3203,3 +3203,151 @@ body.intro-lock {
         display: none !important;
     }
 }
+/* ============================================
+   CLEAN FINAL NAVBAR / MOBILE MENU
+   ============================================ */
+
+.mobile-menu-btn,
+.mobile-menu-panel {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        position: sticky !important;
+        top: 0 !important;
+        width: 100% !important;
+        z-index: 99999 !important;
+        background: #121212 !important;
+        overflow: visible !important;
+    }
+
+    .navbar-container {
+        height: 96px !important;
+        padding: 0 28px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        position: relative !important;
+    }
+
+    .logo {
+        display: flex !important;
+        align-items: center !important;
+        gap: 14px !important;
+        text-decoration: none !important;
+    }
+
+    .logo img {
+        width: 58px !important;
+        height: 58px !important;
+        object-fit: contain !important;
+        border-radius: 50% !important;
+    }
+
+    .logo h1 {
+        color: #ffffff !important;
+        font-size: 1.55rem !important;
+        line-height: 1 !important;
+        margin: 0 !important;
+    }
+
+    .logo p {
+        color: rgba(255, 255, 255, 0.78) !important;
+        font-size: 0.72rem !important;
+        letter-spacing: 4px !important;
+        text-transform: uppercase !important;
+        margin: 4px 0 0 !important;
+    }
+
+    .desktop-menu,
+    .desktop-call,
+    .nav-menu {
+        display: none !important;
+    }
+
+    .mobile-menu-btn {
+        display: flex !important;
+        width: 48px !important;
+        height: 48px !important;
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        cursor: pointer !important;
+        z-index: 100001 !important;
+    }
+
+    .mobile-menu-btn span {
+        display: block !important;
+        width: 32px !important;
+        height: 3px !important;
+        background: #ffffff !important;
+        border-radius: 3px !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .mobile-menu-btn.active span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg) !important;
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+        opacity: 0 !important;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg) !important;
+    }
+
+    .mobile-menu-panel {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        background: rgba(5, 5, 5, 0.98) !important;
+        width: 100% !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        transition: max-height 0.35s ease, padding 0.35s ease !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        padding: 0 !important;
+    }
+
+    .mobile-menu-panel.active {
+        max-height: 600px !important;
+        padding: 16px 0 !important;
+    }
+
+    .mobile-menu-panel a {
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
+        color: #ffffff !important;
+        text-decoration: none !important;
+        padding: 16px 24px !important;
+        font-size: 0.95rem !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+
+    .mobile-call-link {
+        font-weight: 700 !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .desktop-menu {
+        display: flex !important;
+    }
+
+    .desktop-call {
+        display: inline-flex !important;
+    }
+
+    .mobile-menu-btn,
+    .mobile-menu-panel {
+        display: none !important;
+    }
+}

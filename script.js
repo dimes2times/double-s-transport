@@ -391,3 +391,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 // ============================================
+// ============================================
+// CLEAN FINAL MOBILE MENU
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function () {
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileMenuPanel = document.querySelector('.mobile-menu-panel');
+
+    if (!mobileMenuBtn || !mobileMenuPanel) return;
+
+    mobileMenuBtn.addEventListener('click', function () {
+        const isOpen = mobileMenuPanel.classList.toggle('active');
+
+        mobileMenuBtn.classList.toggle('active', isOpen);
+        mobileMenuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    mobileMenuPanel.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+            mobileMenuPanel.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        });
+    });
+});
