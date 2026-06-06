@@ -2993,3 +2993,118 @@ body.intro-lock {
         overflow: hidden !important;
     }
 }
+/* ============================================
+   PURE CSS MOBILE MENU FIX
+   No JavaScript needed
+   ============================================ */
+
+.mobile-menu-toggle {
+    display: none !important;
+}
+
+@media (min-width: 769px) {
+    .hamburger {
+        display: none !important;
+    }
+
+    .nav-menu {
+        display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 10000;
+    }
+
+    .navbar-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .hamburger {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        width: 48px;
+        height: 48px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        position: relative;
+        z-index: 10002;
+    }
+
+    .hamburger span {
+        display: block !important;
+        width: 30px;
+        height: 3px;
+        background: #ffffff;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-menu {
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        background: rgba(5, 5, 5, 0.98) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0 !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        z-index: 10001 !important;
+        transition: max-height 0.35s ease, padding 0.35s ease !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-menu li {
+        width: 100%;
+        list-style: none;
+        text-align: center;
+    }
+
+    .nav-menu a {
+        display: block !important;
+        width: 100%;
+        padding: 16px 24px !important;
+        color: #ffffff !important;
+        font-size: 0.95rem !important;
+        text-decoration: none !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .mobile-menu-toggle:checked ~ .nav-menu {
+        max-height: 620px !important;
+        padding: 18px 0 !important;
+    }
+
+    .mobile-menu-toggle:checked + .hamburger span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+
+    .mobile-menu-toggle:checked + .hamburger span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-menu-toggle:checked + .hamburger span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+
+    .call-btn {
+        display: none !important;
+    }
+}
