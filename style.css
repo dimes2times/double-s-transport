@@ -2826,3 +2826,84 @@ body.intro-lock {
         overflow: hidden;
     }
 }
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        width: 48px;
+        height: 48px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        z-index: 10001;
+        position: relative;
+        padding: 0;
+    }
+
+    .hamburger span {
+        width: 32px;
+        height: 3px;
+        background: #ffffff;
+        display: block;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+
+    .nav-menu {
+        position: fixed !important;
+        top: 96px !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        background: rgba(10, 10, 10, 0.98) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0 !important;
+        padding: 0 !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        z-index: 9999 !important;
+        transition: max-height 0.4s ease, padding 0.4s ease !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-menu.active {
+        max-height: 520px !important;
+        padding: 18px 0 !important;
+    }
+
+    .nav-menu li {
+        width: 100%;
+        text-align: center;
+        list-style: none;
+    }
+
+    .nav-menu a {
+        display: block !important;
+        width: 100%;
+        padding: 16px 24px !important;
+        color: #ffffff !important;
+        font-size: 0.95rem !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    body.menu-open {
+        overflow: hidden;
+    }
+}
