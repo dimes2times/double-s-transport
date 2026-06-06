@@ -339,7 +339,7 @@
             <div class="review-submit-content">
                 <h3>Leave a Review</h3>
                 <p>
-                    Submit your review for approval. Reviews are checked before being published on the website.
+                    Share your experience with Double S Transport. We appreciate your feedback and may feature selected reviews on our website.
                 </p>
             </div>
 
@@ -380,15 +380,19 @@
                     <label for="reviewMessage">Review *</label>
                     <textarea id="reviewMessage" name="reviewMessage" placeholder="Tell us about your experience..." required></textarea>
                 </div>
-
+<div class="form-group">
+    <label for="reviewPhotos">Add Photos Optional</label>
+    <input type="file" id="reviewPhotos" name="reviewPhotos" accept="image/*" multiple>
+    <small class="photo-note">You can select photos from your experience. After submitting, WhatsApp will open so you can attach them.</small>
+</div>
                 <label class="review-consent">
-                    <input type="checkbox" id="reviewConsent" required>
-                    I understand my review will be reviewed before being published.
-                </label>
+    <input type="checkbox" id="reviewConsent" required>
+    I agree that my feedback and any submitted photos may be featured by Double S Transport.
+</label>
 
                 <button type="submit" class="btn btn-primary full-width">
-                    <i class="fab fa-whatsapp"></i> Submit Review for Approval
-                </button>
+    <i class="fab fa-whatsapp"></i> Share Your Experience
+</button>
             </form>
         </div>
     </div>

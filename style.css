@@ -2357,3 +2357,53 @@ body.intro-lock {
         min-width: 285px !important;
     }
 }
+/* ============================================
+   REVIEW PHOTO UPLOAD FIELD
+   ============================================ */
+
+.photo-note {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.62);
+}
+
+.review-form input[type="file"] {
+    padding: 14px 16px;
+    cursor: pointer;
+}
+
+.review-form input[type="file"]::file-selector-button {
+    background: #ffffff;
+    color: #050505;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    margin-right: 14px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.review-form input[type="file"]::file-selector-button:hover {
+    background: #c0c0c0;
+}
+@media (max-width: 768px) {
+    .photo-note {
+        font-size: 0.78rem;
+        line-height: 1.5;
+    }
+
+    .review-form input[type="file"] {
+        width: 100%;
+        font-size: 0.85rem;
+    }
+
+    .review-form input[type="file"]::file-selector-button {
+        display: block;
+        width: 100%;
+        margin: 0 0 10px 0;
+        padding: 12px 14px;
+    }
+}

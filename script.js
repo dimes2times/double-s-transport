@@ -252,8 +252,8 @@ document.addEventListener('DOMContentLoaded', () => {
         siteIntro.remove();
     }, 3900);
 });
-// ============================================
-// REVIEW FORM - SEND TO WHATSAPP FOR APPROVAL
+/// ============================================
+// REVIEW FORM - SEND TO WHATSAPP
 // ============================================
 
 const reviewForm = document.getElementById('reviewForm');
@@ -267,6 +267,7 @@ if (reviewForm) {
         const reviewRating = document.getElementById('reviewRating').value;
         const reviewMessage = document.getElementById('reviewMessage').value.trim();
         const reviewConsent = document.getElementById('reviewConsent').checked;
+        const reviewPhotos = document.getElementById('reviewPhotos');
 
         if (!reviewName || !reviewService || !reviewRating || !reviewMessage || !reviewConsent) {
             if (typeof showNotification === 'function') {
@@ -278,20 +279,28 @@ if (reviewForm) {
         }
 
         const stars = '★'.repeat(Number(reviewRating)) + '☆'.repeat(5 - Number(reviewRating));
+        const photoCount = reviewPhotos && reviewPhotos.files.length > 0 ? reviewPhotos.files.length : 0;
+
+        let photoLine = '';
+
+        if (photoCount > 0) {
+            photoLine = `\n*Photos:* ${photoCount} photo(s) selected. Please attach them in this WhatsApp chat after sending this message.\n`;
+        }
 
         const whatsappText = encodeURIComponent(
-            `*NEW REVIEW SUBMISSION - DOUBLE S TRANSPORT*\n\n` +
+            `*NEW REVIEW - DOUBLE S TRANSPORT*\n\n` +
             `*Name:* ${reviewName}\n` +
             `*Service:* ${reviewService}\n` +
             `*Rating:* ${stars}\n\n` +
-            `*Review:*\n${reviewMessage}\n\n` +
-            `Please review this before publishing it on the website.`
+            `*Review:*\n${reviewMessage}\n` +
+            photoLine +
+            `\nThank you for sharing your experience with Double S Transport.`
         );
 
         const whatsappUrl = `https://wa.me/16492478057?text=${whatsappText}`;
 
         if (typeof showNotification === 'function') {
-            showNotification('Opening WhatsApp to submit your review for approval.', 'success');
+            showNotification('Opening WhatsApp to submit your review.', 'success');
         }
 
         setTimeout(() => {
