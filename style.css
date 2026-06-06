@@ -2907,3 +2907,89 @@ body.intro-lock {
         overflow: hidden;
     }
 }
+/* ============================================
+   FINAL MOBILE MENU FIX
+   ============================================ */
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 6px !important;
+        width: 48px !important;
+        height: 48px !important;
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer !important;
+        padding: 0 !important;
+        position: relative !important;
+        z-index: 100000 !important;
+    }
+
+    .hamburger span {
+        display: block !important;
+        width: 30px !important;
+        height: 3px !important;
+        background: #ffffff !important;
+        border-radius: 3px !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg) !important;
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0 !important;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg) !important;
+    }
+
+    .nav-menu {
+        position: fixed !important;
+        top: 88px !important;
+        left: 0 !important;
+        width: 100% !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        background: rgba(5, 5, 5, 0.98) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        z-index: 99999 !important;
+        transition: max-height 0.35s ease, padding 0.35s ease !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .nav-menu.active {
+        max-height: 600px !important;
+        padding: 18px 0 !important;
+    }
+
+    .nav-menu li {
+        width: 100% !important;
+        list-style: none !important;
+        text-align: center !important;
+    }
+
+    .nav-menu a {
+        display: block !important;
+        width: 100% !important;
+        padding: 16px 24px !important;
+        color: #ffffff !important;
+        font-size: 0.95rem !important;
+        text-decoration: none !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+
+    body.menu-open {
+        overflow: hidden !important;
+    }
+}
