@@ -2688,3 +2688,51 @@ body.intro-lock {
         max-width: 285px !important;
     }
 }
+/* ============================================
+   FINAL FIX: REMOVE FLOATING HERO STATS ON MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .hero-stats,
+    .hero-highlights,
+    .stats-preview,
+    .hero-info-card,
+    .hero-card,
+    .hero-feature-card,
+    .hero .floating-card,
+    .hero .side-card,
+    .hero .glass-card {
+        display: none !important;
+    }
+
+    .hero {
+        min-height: 82vh !important;
+        padding: 95px 20px 75px !important;
+    }
+
+    .hero-content {
+        max-width: 360px !important;
+        margin: 0 auto !important;
+        transform: none !important;
+    }
+
+    .hero-title {
+        font-size: clamp(2.15rem, 10vw, 2.85rem) !important;
+        line-height: 1.06 !important;
+        max-width: 340px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .hero-subtitle {
+        max-width: 315px !important;
+        font-size: 0.88rem !important;
+        line-height: 1.65 !important;
+        margin-bottom: 28px !important;
+    }
+
+    .hero-buttons {
+        max-width: 285px !important;
+        margin: 0 auto !important;
+    }
+}
