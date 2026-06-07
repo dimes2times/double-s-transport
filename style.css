@@ -1530,3 +1530,128 @@ html.intro-done .site-intro {
     visibility: hidden !important;
     pointer-events: none !important;
 }
+/* ============================================
+   FIX REVIEW FORM MOBILE OVERFLOW
+   Photo upload / checkbox / black box cleanup
+   ============================================ */
+
+@media (max-width: 768px) {
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden !important;
+    }
+
+    .reviews {
+        overflow-x: hidden !important;
+    }
+
+    .review-submit-box {
+        width: calc(100% - 32px) !important;
+        max-width: 420px !important;
+        margin: 50px auto 0 !important;
+        padding: 34px 20px !important;
+        border-radius: 18px !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
+    }
+
+    .review-form {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+    }
+
+    .review-form .form-group {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+    }
+
+    .review-form input,
+    .review-form select,
+    .review-form textarea {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .review-form input[type="file"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 12px !important;
+        overflow: hidden !important;
+        font-size: 0.85rem !important;
+        color: rgba(255, 255, 255, 0.75) !important;
+    }
+
+    .review-form input[type="file"]::file-selector-button {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: block !important;
+        margin: 0 0 10px 0 !important;
+        padding: 13px 14px !important;
+        border-radius: 6px !important;
+        border: none !important;
+        background: #ffffff !important;
+        color: #050505 !important;
+        font-weight: 700 !important;
+    }
+
+    .photo-note {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        font-size: 0.78rem !important;
+        line-height: 1.55 !important;
+        overflow-wrap: break-word !important;
+        word-break: normal !important;
+    }
+
+    .review-consent {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: grid !important;
+        grid-template-columns: 22px 1fr !important;
+        gap: 12px !important;
+        align-items: flex-start !important;
+        font-size: 0.84rem !important;
+        line-height: 1.6 !important;
+        overflow-wrap: break-word !important;
+    }
+
+    .review-consent input {
+        width: 18px !important;
+        height: 18px !important;
+        margin-top: 4px !important;
+        flex-shrink: 0 !important;
+    }
+
+    .review-submit-content h3 {
+        font-size: 1.85rem !important;
+        line-height: 1.12 !important;
+    }
+
+    .review-submit-content p {
+        font-size: 0.92rem !important;
+        line-height: 1.65 !important;
+        max-width: 100% !important;
+    }
+
+    .review-form .btn,
+    .review-form button {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        font-size: 0.88rem !important;
+        padding: 15px 16px !important;
+    }
+
+    .whatsapp-button {
+        width: 54px !important;
+        height: 54px !important;
+        right: 18px !important;
+        bottom: 24px !important;
+        font-size: 1.45rem !important;
+    }
+}
