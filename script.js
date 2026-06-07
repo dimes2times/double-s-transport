@@ -5,30 +5,33 @@
 const WHATSAPP_NUMBER = '16492478057';
 
 // ============================================
-// FINAL INTRO CONTROL
-// Plays once, then never flashes on refresh
+// FINAL INTRO ANIMATION CONTROL
+// Plays once, then never flashes again
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
+    const introKey = 'doubleSIntroPlayed_v3';
     const siteIntro = document.getElementById('siteIntro');
 
     if (!siteIntro) return;
 
-    const introKey = 'doubleSIntroPlayed';
-
-    if (localStorage.getItem(introKey)) {
+    if (localStorage.getItem(introKey) === 'true') {
         siteIntro.remove();
-        document.body.classList.remove('intro-lock', 'play-intro');
+        document.body.classList.remove('intro-lock');
+        document.documentElement.classList.remove('intro-pending');
+        document.documentElement.classList.add('intro-done');
         return;
     }
 
     localStorage.setItem(introKey, 'true');
 
-    document.body.classList.add('play-intro', 'intro-lock');
+    document.body.classList.add('intro-lock');
 
     setTimeout(() => {
         siteIntro.classList.add('hide-intro');
-        document.body.classList.remove('intro-lock', 'play-intro');
+        document.body.classList.remove('intro-lock');
+        document.documentElement.classList.remove('intro-pending');
+        document.documentElement.classList.add('intro-done');
     }, 4300);
 
     setTimeout(() => {

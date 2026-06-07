@@ -1508,3 +1508,25 @@ body.play-intro {
     visibility: hidden !important;
     pointer-events: none !important;
 }
+/* ============================================
+   FINAL INTRO FLASH FIX
+   Prevents intro from showing after first visit
+   ============================================ */
+
+.site-intro {
+    display: none !important;
+}
+
+html.intro-pending .site-intro {
+    display: flex !important;
+}
+
+html.intro-done .site-intro {
+    display: none !important;
+}
+
+.site-intro.hide-intro {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
