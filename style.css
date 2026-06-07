@@ -3371,3 +3371,72 @@ body.intro-lock .mobile-menu-btn {
     visibility: hidden !important;
     pointer-events: none !important;
 }
+/* ============================================
+   FIX NAVBAR LOGO SIZE / PREVENT HUGE LOGO BUG
+   ============================================ */
+
+.navbar .logo {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    text-decoration: none !important;
+    width: auto !important;
+    max-width: 260px !important;
+    overflow: hidden !important;
+}
+
+.navbar .logo img {
+    width: 56px !important;
+    height: 56px !important;
+    max-width: 56px !important;
+    max-height: 56px !important;
+    min-width: 56px !important;
+    object-fit: contain !important;
+    border-radius: 50% !important;
+    display: block !important;
+}
+
+.navbar .logo .logo-text,
+.navbar .logo div {
+    display: block !important;
+}
+
+.navbar .logo h1 {
+    font-size: 1.35rem !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+    color: #ffffff !important;
+}
+
+.navbar .logo p {
+    font-size: 0.7rem !important;
+    letter-spacing: 3px !important;
+    text-transform: uppercase !important;
+    margin: 4px 0 0 !important;
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* Keep navbar from allowing the logo to spill out */
+.navbar,
+.navbar-container {
+    overflow: visible !important;
+}
+
+@media (max-width: 768px) {
+    .navbar .logo img {
+        width: 58px !important;
+        height: 58px !important;
+        max-width: 58px !important;
+        max-height: 58px !important;
+        min-width: 58px !important;
+    }
+
+    .navbar .logo h1 {
+        font-size: 1.45rem !important;
+    }
+
+    .navbar .logo p {
+        font-size: 0.7rem !important;
+        letter-spacing: 3px !important;
+    }
+}
