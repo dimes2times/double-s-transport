@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Double S Transport - Premium Transportation in Turks & Caicos</title>
 
+
+    <!-- Prevent intro flash after it has already played in this session -->
+    <script>
+        if (sessionStorage.getItem('doubleSIntroPlayed')) {
+            document.documentElement.classList.add('intro-played');
+        }
+    </script>
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="apple-touch-icon" href="images/favicon.png">
@@ -32,12 +40,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="pageLoadFade" class="page-load-fade"></div>
 <!-- Premium Island Intro Animation -->
 <div id="siteIntro" class="site-intro">
     <div class="intro-bg-glow"></div>
 <!-- Turks & Caicos Map Overlay -->
 <img src="images/tci-overlay.png" class="intro-islands-overlay" alt="">
-</svg>
     <div class="intro-logo-wrap">
         <img src="images/logo.jpg" alt="Double S Transport Logo" class="intro-logo">
         <h1>Double S Transport</h1>
@@ -297,11 +305,14 @@
                     <p>Luxury SUV and Private Taxi Service options.</p>
                 </div>
 
-                <div class="stat-card">
-                    <div class="stat-line"><span class="stat-number" data-target="1">0</span><span class="stat-suffix">st</span></div>
-                    <h3>Guest Experience</h3>
-                    <p>Professional service from start to finish.</p>
-                </div>
+           <div class="stat-card">
+    <div class="stat-line">
+        <span class="stat-number" data-target="5">0</span>
+        <span class="stat-suffix">★</span>
+    </div>
+    <h3>Premium Service</h3>
+    <p>Professional, comfortable, and reliable transportation from start to finish.</p>
+</div>
             </div>
         </div>
     </section>
@@ -647,7 +658,6 @@
 </a>
 
 <script src="script.js"></script>
-<script>
-</script>
 </body>
+
 </html>

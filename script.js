@@ -1,81 +1,147 @@
 // ============================================
-// DOUBLE S TRANSPORT - WEBSITE INTERACTIONS
+// DOUBLE S TRANSPORT - CLEAN WEBSITE SCRIPT
 // ============================================
-
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
-const navLinks = document.querySelectorAll('.nav-menu a');
-const bookingForm = document.getElementById('bookingForm');
 
 const WHATSAPP_NUMBER = '16492478057';
 
+// --------------------------------------------
+// Intro animation - play once per browser session
+// --------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    const siteIntro = document.getElementById('siteIntro');
+
+    if (!siteIntro) return;
+
+    const introAlreadyPlayed = sessionStorage.getItem('doubleSIntroPlayed');
+
+    if (introAlreadyPlayed) {
+        siteIntro.remove();
+        document.body.classList.remove('intro-lock');
+        return;
+    }
+
+    sessionStorage.setItem('doubleSIntroPlayed', 'true');
+    document.body.classList.add('intro-lock');
+
+    setTimeout(() => {
+        siteIntro.classList.add('hide-intro');
+        document.body.classList.remove('intro-lock');
+    }, 4300);
+
+    setTimeout(() => {
+        if (siteIntro && siteIntro.parentNode) siteIntro.remove();
+    }, 5300);
+});
+
+// --------------------------------------------
 // Mobile menu
-if (hamburger && navMenu) {
-    hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
+// --------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileMenuPanel = document.querySelector('.mobile-menu-panel');
+
+    if (!mobileMenuBtn || !mobileMenuPanel) return;
+
+    const closeMenu = () => {
+        mobileMenuPanel.classList.remove('active');
+        mobileMenuBtn.classList.remove('active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+    };
+
+    mobileMenuBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const isOpen = mobileMenuPanel.classList.toggle('active');
+        mobileMenuBtn.classList.toggle('active', isOpen);
+        mobileMenuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        document.body.classList.toggle('menu-open', isOpen);
     });
-}
 
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu?.classList.remove('active');
+    mobileMenuPanel.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('.navbar')) closeMenu();
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeMenu();
     });
 });
 
-document.addEventListener('click', event => {
-    if (!event.target.closest('.navbar')) {
-        navMenu?.classList.remove('active');
-    }
-});
-
-document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') {
-        navMenu?.classList.remove('active');
-    }
-});
-
-// Navbar shadow on scroll
-const navbar = document.querySelector('.navbar');
-
-window.addEventListener('scroll', () => {
+// --------------------------------------------
+// Navbar shadow
+// --------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    const navbar = document.querySelector('.navbar');
     if (!navbar) return;
 
-    if (window.scrollY > 80) {
-        navbar.style.boxShadow = '0 14px 36px rgba(0,0,0,0.20)';
-    } else {
-        navbar.style.boxShadow = 'none';
-    }
+    const updateShadow = () => {
+        navbar.style.boxShadow = window.scrollY > 80
+            ? '0 14px 36px rgba(0,0,0,0.20)'
+            : 'none';
+    };
+
+    updateShadow();
+    window.addEventListener('scroll', updateShadow, { passive: true });
 });
 
-// Scroll reveal
-const revealItems = document.querySelectorAll(
-    '.service-card, .vehicle-card, .feature-card, .stat-card, .contact-card, .booking-form, .booking-side'
-);
+// --------------------------------------------
+// Smooth scrolling for internal links
+// --------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function (event) {
+            const href = this.getAttribute('href');
+            if (!href || href === '#') return;
 
-revealItems.forEach(item => item.classList.add('reveal'));
+            const target = document.querySelector(href);
+            if (!target) return;
 
-const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            revealObserver.unobserve(entry.target);
-        }
+            event.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
     });
-}, {
-    threshold: 0.15
 });
 
-revealItems.forEach(item => revealObserver.observe(item));
+// --------------------------------------------
+// Scroll reveal animation
+// --------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    const revealItems = document.querySelectorAll(
+        '.service-card, .vehicle-card, .feature-card, .stat-card, .contact-card, .booking-form, .booking-side, .review-card, .review-submit-box'
+    );
 
+    if (!('IntersectionObserver' in window)) {
+        revealItems.forEach(item => item.classList.add('is-visible'));
+        return;
+    }
+
+    revealItems.forEach(item => item.classList.add('reveal'));
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    revealItems.forEach(item => revealObserver.observe(item));
+});
+
+// --------------------------------------------
 // Animated counters
+// --------------------------------------------
 function animateCounter(element, target, duration = 1600) {
-    let start = 0;
     const startTime = performance.now();
 
     function update(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        const value = Math.floor(start + (target - start) * progress);
+        const value = Math.floor(target * progress);
 
         element.textContent = value;
 
@@ -89,77 +155,195 @@ function animateCounter(element, target, duration = 1600) {
     requestAnimationFrame(update);
 }
 
-const statObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
+document.addEventListener('DOMContentLoaded', () => {
+    const statCards = document.querySelectorAll('.stat-card');
 
-        const number = entry.target.querySelector('.stat-number');
+    if (!('IntersectionObserver' in window)) {
+        statCards.forEach((card) => {
+            const number = card.querySelector('.stat-number');
+            if (number) number.textContent = number.dataset.target || number.textContent;
+        });
+        return;
+    }
 
-        if (number && !number.dataset.animated) {
-            number.dataset.animated = 'true';
-            animateCounter(number, parseInt(number.dataset.target, 10));
-        }
+    const statObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
 
-        statObserver.unobserve(entry.target);
-    });
-}, {
-    threshold: 0.5
+            const number = entry.target.querySelector('.stat-number');
+            if (number && !number.dataset.animated) {
+                number.dataset.animated = 'true';
+                animateCounter(number, parseInt(number.dataset.target || '0', 10));
+            }
+
+            statObserver.unobserve(entry.target);
+        });
+    }, { threshold: 0.5 });
+
+    statCards.forEach(card => statObserver.observe(card));
 });
 
-document.querySelectorAll('.stat-card').forEach(card => statObserver.observe(card));
-
+// --------------------------------------------
 // Booking form to WhatsApp
-if (bookingForm) {
-    bookingForm.addEventListener('submit', event => {
+// --------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    const bookingForm = document.getElementById('bookingForm');
+    if (!bookingForm) return;
+
+    bookingForm.addEventListener('submit', (event) => {
         event.preventDefault();
 
-        const fullName = document.getElementById('fullName').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const pickup = document.getElementById('pickup').value.trim();
-        const destination = document.getElementById('destination').value.trim();
-        const date = document.getElementById('date').value;
-        const time = document.getElementById('time').value;
-        const vehicle = document.getElementById('vehicle').value;
-        const passengers = document.getElementById('passengers').value;
-        const message = document.getElementById('message').value.trim();
+        const fullName = document.getElementById('fullName')?.value.trim();
+        const phone = document.getElementById('phone')?.value.trim();
+        const pickup = document.getElementById('pickup')?.value.trim();
+        const destination = document.getElementById('destination')?.value.trim();
+        const date = document.getElementById('date')?.value;
+        const time = document.getElementById('time')?.value;
+        const vehicle = document.getElementById('vehicle')?.value || 'No preference';
+        const passengers = document.getElementById('passengers')?.value || 'Not specified';
+        const message = document.getElementById('message')?.value.trim();
 
         if (!fullName || !phone || !pickup || !destination || !date || !time) {
             showNotification('Please fill in all required fields.', 'error');
             return;
         }
 
-        const bookingMessage = `*Double S Transport Booking Request*
-
-*Name:* ${fullName}
-*Phone:* ${phone}
-*Pickup:* ${pickup}
-*Destination:* ${destination}
-*Date:* ${date}
-*Time:* ${time}
-*Preferred Vehicle:* ${vehicle}
-*Passengers:* ${passengers}
-${message ? `*Special Requests:* ${message}` : ''}
-
-Please confirm availability and pricing.`;
+        const bookingMessage = `*Double S Transport Booking Request*\n\n` +
+            `*Name:* ${fullName}\n` +
+            `*Phone:* ${phone}\n` +
+            `*Pickup:* ${pickup}\n` +
+            `*Destination:* ${destination}\n` +
+            `*Date:* ${date}\n` +
+            `*Time:* ${time}\n` +
+            `*Preferred Vehicle:* ${vehicle}\n` +
+            `*Passengers:* ${passengers}\n` +
+            `${message ? `*Special Requests:* ${message}\n` : ''}\n` +
+            `Please confirm availability and pricing.`;
 
         const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(bookingMessage)}`;
 
         showNotification('Opening WhatsApp to send your booking request.', 'success');
-
-        setTimeout(() => {
-            window.open(whatsappUrl, '_blank');
-        }, 700);
+        setTimeout(() => window.open(whatsappUrl, '_blank'), 700);
     });
-}
+});
 
-// Date picker minimum date
-const dateInput = document.getElementById('date');
+// --------------------------------------------
+// Footer service request links
+// --------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    const serviceRequestLinks = document.querySelectorAll('.service-request-link');
 
-if (dateInput) {
-    dateInput.min = new Date().toISOString().split('T')[0];
-}
+    serviceRequestLinks.forEach((link) => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
 
+            const selectedService = this.getAttribute('data-service') || 'transportation service';
+            const bookingSection = document.querySelector('#booking');
+            const messageBox = document.querySelector('#message');
+
+            if (messageBox) {
+                messageBox.value = `Hello Double S Transport, I would like to request ${selectedService}. Please contact me with availability and pricing.`;
+            }
+
+            if (bookingSection) {
+                bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            showNotification(`${selectedService} selected. Complete your booking details.`, 'success');
+        });
+    });
+});
+
+// --------------------------------------------
+// Review form to WhatsApp
+// --------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    const reviewForm = document.getElementById('reviewForm');
+    if (!reviewForm) return;
+
+    reviewForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const reviewName = document.getElementById('reviewName')?.value.trim();
+        const reviewService = document.getElementById('reviewService')?.value;
+        const reviewRating = document.getElementById('reviewRating')?.value;
+        const reviewMessage = document.getElementById('reviewMessage')?.value.trim();
+        const reviewConsent = document.getElementById('reviewConsent')?.checked;
+        const reviewPhotos = document.getElementById('reviewPhotos');
+
+        if (!reviewName || !reviewService || !reviewRating || !reviewMessage || !reviewConsent) {
+            showNotification('Please complete all review fields.', 'error');
+            return;
+        }
+
+        const stars = '★'.repeat(Number(reviewRating)) + '☆'.repeat(5 - Number(reviewRating));
+        const photoCount = reviewPhotos?.files?.length || 0;
+        const photoLine = photoCount > 0
+            ? `\n*Photos:* ${photoCount} photo(s) selected. Please attach them in this WhatsApp chat after sending this message.\n`
+            : '';
+
+        const whatsappText = `*NEW REVIEW - DOUBLE S TRANSPORT*\n\n` +
+            `*Name:* ${reviewName}\n` +
+            `*Service:* ${reviewService}\n` +
+            `*Rating:* ${stars}\n\n` +
+            `*Review:*\n${reviewMessage}\n` +
+            photoLine +
+            `\nThank you for sharing your experience with Double S Transport.`;
+
+        const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappText)}`;
+
+        showNotification('Opening WhatsApp to submit your review.', 'success');
+        setTimeout(() => window.open(whatsappUrl, '_blank'), 700);
+        reviewForm.reset();
+    });
+});
+
+// --------------------------------------------
+// Mobile review belt duplication
+// --------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    const reviewsGrid = document.querySelector('.reviews-grid');
+    if (!reviewsGrid) return;
+
+    const enableReviewBelt = () => {
+        if (window.innerWidth <= 768 && !reviewsGrid.classList.contains('belt-ready')) {
+            const cards = Array.from(reviewsGrid.children);
+            cards.forEach((card) => {
+                const clone = card.cloneNode(true);
+                clone.setAttribute('aria-hidden', 'true');
+                reviewsGrid.appendChild(clone);
+            });
+            reviewsGrid.classList.add('belt-ready');
+        }
+    };
+
+    enableReviewBelt();
+});
+
+// --------------------------------------------
+// Form enhancements
+// --------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    const dateInput = document.getElementById('date');
+    if (dateInput) dateInput.min = new Date().toISOString().split('T')[0];
+
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', (event) => {
+            let value = event.target.value.replace(/\D/g, '');
+            if (value.length > 3 && value.length <= 6) {
+                value = `(${value.slice(0, 3)}) ${value.slice(3)}`;
+            } else if (value.length > 6) {
+                value = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 10)}`;
+            }
+            event.target.value = value;
+        });
+    }
+});
+
+// --------------------------------------------
 // Notification system
+// --------------------------------------------
 function showNotification(message, type = 'info') {
     const existing = document.querySelector('.notification');
     if (existing) existing.remove();
@@ -203,216 +387,19 @@ function showNotification(message, type = 'info') {
     }, 3400);
 }
 // ============================================
-// FOOTER SERVICE REQUEST LINKS
+// SOFT PAGE REFRESH FADE
 // ============================================
 
-const serviceRequestLinks = document.querySelectorAll('.service-request-link');
+window.addEventListener('load', () => {
+    const pageLoadFade = document.getElementById('pageLoadFade');
 
-serviceRequestLinks.forEach(link => {
-    link.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        const selectedService = this.getAttribute('data-service');
-        const bookingSection = document.querySelector('#booking');
-        const messageBox = document.querySelector('#message');
-
-        const serviceMessage = `Hello Double S Transport, I would like to request ${selectedService}. Please contact me with availability and pricing.`;
-
-        if (messageBox) {
-            messageBox.value = serviceMessage;
-        }
-
-        if (bookingSection) {
-            bookingSection.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-
-        showNotification(`${selectedService} selected. Complete your booking details.`, 'success');
-    });
-});
-// ============================================
-// PREMIUM INTRO ANIMATION
-// ============================================
-
-document.addEventListener('DOMContentLoaded', () => {
-    const siteIntro = document.getElementById('siteIntro');
-
-    if (!siteIntro) return;
-
-    document.body.classList.add('intro-lock');
+    if (!pageLoadFade) return;
 
     setTimeout(() => {
-        siteIntro.classList.add('hide-intro');
-        document.body.classList.remove('intro-lock');
-    }, 2900);
+        pageLoadFade.classList.add('fade-out');
+    }, 250);
 
     setTimeout(() => {
-        siteIntro.remove();
-    }, 3900);
-});
-/// ============================================
-// REVIEW FORM - SEND TO WHATSAPP
-// ============================================
-
-const reviewForm = document.getElementById('reviewForm');
-
-if (reviewForm) {
-    reviewForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const reviewName = document.getElementById('reviewName').value.trim();
-        const reviewService = document.getElementById('reviewService').value;
-        const reviewRating = document.getElementById('reviewRating').value;
-        const reviewMessage = document.getElementById('reviewMessage').value.trim();
-        const reviewConsent = document.getElementById('reviewConsent').checked;
-        const reviewPhotos = document.getElementById('reviewPhotos');
-
-        if (!reviewName || !reviewService || !reviewRating || !reviewMessage || !reviewConsent) {
-            if (typeof showNotification === 'function') {
-                showNotification('Please complete all review fields.', 'error');
-            } else {
-                alert('Please complete all review fields.');
-            }
-            return;
-        }
-
-        const stars = '★'.repeat(Number(reviewRating)) + '☆'.repeat(5 - Number(reviewRating));
-        const photoCount = reviewPhotos && reviewPhotos.files.length > 0 ? reviewPhotos.files.length : 0;
-
-        let photoLine = '';
-
-        if (photoCount > 0) {
-            photoLine = `\n*Photos:* ${photoCount} photo(s) selected. Please attach them in this WhatsApp chat after sending this message.\n`;
-        }
-
-        const whatsappText = encodeURIComponent(
-            `*NEW REVIEW - DOUBLE S TRANSPORT*\n\n` +
-            `*Name:* ${reviewName}\n` +
-            `*Service:* ${reviewService}\n` +
-            `*Rating:* ${stars}\n\n` +
-            `*Review:*\n${reviewMessage}\n` +
-            photoLine +
-            `\nThank you for sharing your experience with Double S Transport.`
-        );
-
-        const whatsappUrl = `https://wa.me/16492478057?text=${whatsappText}`;
-
-        if (typeof showNotification === 'function') {
-            showNotification('Opening WhatsApp to submit your review.', 'success');
-        }
-
-        setTimeout(() => {
-            window.open(whatsappUrl, '_blank');
-        }, 700);
-
-        reviewForm.reset();
-    });
-}
-// ============================================
-// MOBILE REVIEW BELT DUPLICATION
-// Creates a smooth infinite sliding review belt on phones
-// ============================================
-
-document.addEventListener('DOMContentLoaded', () => {
-    const reviewsGrid = document.querySelector('.reviews-grid');
-
-    if (!reviewsGrid) return;
-
-    const enableReviewBelt = () => {
-        if (window.innerWidth <= 768 && !reviewsGrid.classList.contains('belt-ready')) {
-            const cards = Array.from(reviewsGrid.children);
-
-            cards.forEach(card => {
-                const clone = card.cloneNode(true);
-                clone.setAttribute('aria-hidden', 'true');
-                reviewsGrid.appendChild(clone);
-            });
-
-            reviewsGrid.classList.add('belt-ready');
-        }
-    };
-
-    enableReviewBelt();
-});
-// ============================================
-// MOBILE REVIEW BELT DUPLICATION
-// ============================================
-
-document.addEventListener('DOMContentLoaded', () => {
-    const reviewsGrid = document.querySelector('.reviews-grid');
-
-    if (!reviewsGrid) return;
-
-    if (window.innerWidth <= 768 && !reviewsGrid.classList.contains('belt-ready')) {
-        const cards = Array.from(reviewsGrid.children);
-
-        cards.forEach(card => {
-            const clone = card.cloneNode(true);
-            clone.setAttribute('aria-hidden', 'true');
-            reviewsGrid.appendChild(clone);
-        });
-
-        reviewsGrid.classList.add('belt-ready');
-    }
-});
-// ============================================
-// FINAL MOBILE HAMBURGER MENU FIX
-// ============================================
-
-document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-
-    if (!hamburger || !navMenu) return;
-
-    hamburger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        document.body.classList.toggle('menu-open');
-    });
-
-    navMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            document.body.classList.remove('menu-open');
-        });
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.navbar')) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            document.body.classList.remove('menu-open');
-        }
-    });
-});
-// ============================================
-// ============================================
-// CLEAN FINAL MOBILE MENU
-// ============================================
-
-document.addEventListener('DOMContentLoaded', function () {
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const mobileMenuPanel = document.querySelector('.mobile-menu-panel');
-
-    if (!mobileMenuBtn || !mobileMenuPanel) return;
-
-    mobileMenuBtn.addEventListener('click', function () {
-        const isOpen = mobileMenuPanel.classList.toggle('active');
-
-        mobileMenuBtn.classList.toggle('active', isOpen);
-        mobileMenuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-
-    mobileMenuPanel.querySelectorAll('a').forEach(function (link) {
-        link.addEventListener('click', function () {
-            mobileMenuPanel.classList.remove('active');
-            mobileMenuBtn.classList.remove('active');
-            mobileMenuBtn.setAttribute('aria-expanded', 'false');
-        });
-    });
+        pageLoadFade.remove();
+    }, 1100);
 });
