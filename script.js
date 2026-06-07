@@ -4,32 +4,35 @@
 
 const WHATSAPP_NUMBER = '16492478057';
 
-// --------------------------------------------
-// Intro animation - play once per browser session
-// --------------------------------------------
+// ============================================
+// FINAL INTRO CONTROL
+// Plays once, then never flashes on refresh
+// ============================================
+
 document.addEventListener('DOMContentLoaded', () => {
     const siteIntro = document.getElementById('siteIntro');
 
     if (!siteIntro) return;
 
-    const introAlreadyPlayed = sessionStorage.getItem('doubleSIntroPlayed');
+    const introKey = 'doubleSIntroPlayed';
 
-    if (introAlreadyPlayed) {
+    if (localStorage.getItem(introKey)) {
         siteIntro.remove();
-        document.body.classList.remove('intro-lock');
+        document.body.classList.remove('intro-lock', 'play-intro');
         return;
     }
 
-    sessionStorage.setItem('doubleSIntroPlayed', 'true');
-    document.body.classList.add('intro-lock');
+    localStorage.setItem(introKey, 'true');
+
+    document.body.classList.add('play-intro', 'intro-lock');
 
     setTimeout(() => {
         siteIntro.classList.add('hide-intro');
-        document.body.classList.remove('intro-lock');
+        document.body.classList.remove('intro-lock', 'play-intro');
     }, 4300);
 
     setTimeout(() => {
-        if (siteIntro && siteIntro.parentNode) siteIntro.remove();
+        siteIntro.remove();
     }, 5300);
 });
 

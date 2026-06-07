@@ -1486,3 +1486,25 @@ textarea {
     opacity: 0;
     visibility: hidden;
 }
+/* ============================================
+   FIX INTRO FLASH ON MOBILE / RELOAD
+   Intro is hidden by default and only plays when JS allows it
+   ============================================ */
+
+.site-intro {
+    display: none !important;
+}
+
+body.play-intro .site-intro {
+    display: flex !important;
+}
+
+body.play-intro {
+    overflow: hidden !important;
+}
+
+.site-intro.hide-intro {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
