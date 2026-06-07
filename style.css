@@ -3351,3 +3351,23 @@ body.intro-lock {
         display: none !important;
     }
 }
+/* ============================================
+   FIX NAVBAR SHOWING DURING INTRO
+   ============================================ */
+
+.site-intro {
+    z-index: 999999 !important;
+}
+
+body.intro-lock .navbar {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+body.intro-lock .mobile-menu-panel,
+body.intro-lock .mobile-menu-btn {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
