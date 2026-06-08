@@ -409,3 +409,38 @@ window.addEventListener('load', () => {
         pageLoadFade.remove();
     }, 1100);
 });
+// ============================================
+// FINAL MOBILE REVIEW BELT
+// Smooth infinite scrolling reviews on mobile
+// ============================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    const reviewsGrid = document.querySelector('.reviews-grid');
+
+    if (!reviewsGrid) return;
+
+    const setupReviewBelt = () => {
+        if (window.innerWidth > 768) return;
+        if (reviewsGrid.classList.contains('belt-ready')) return;
+
+        const originalCards = Array.from(reviewsGrid.children);
+
+        originalCards.forEach(card => {
+            const clone = card.cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            reviewsGrid.appendChild(clone);
+        });
+
+        reviewsGrid.classList.add('belt-ready');
+
+        const originalWidth = originalCards.reduce((total, card) => {
+            const style = window.getComputedStyle(reviewsGrid);
+            const gap = parseFloat(style.columnGap || style.gap || 0);
+            return total + card.offsetWidth + gap;
+        }, 0);
+
+        reviewsGrid.style.setProperty('--review-scroll-distance', `${originalWidth}px`);
+    };
+
+    setupReviewBelt();
+});
