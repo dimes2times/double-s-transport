@@ -1,18 +1,20 @@
 // ============================================
-// FINAL INTRO ANIMATION CONTROL
-// Plays once per browser session, including mobile
+// ============================================
+// INTRO ANIMATION + REFRESH FADE
+// Intro plays once per browser tab session.
+// Refresh fade plays every page load.
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
     const siteIntro = document.getElementById('siteIntro');
+    const introKey = 'doubleSIntroPlayedSession';
+
     if (!siteIntro) return;
 
-    const introKey = 'doubleSIntroPlayed_v4';
-
-    // Add ?intro=1 to the URL when you want to preview the intro again.
     const forceIntro = new URLSearchParams(window.location.search).get('intro') === '1';
+    const introAlreadyPlayed = sessionStorage.getItem(introKey);
 
-    if (!forceIntro && sessionStorage.getItem(introKey) === 'true') {
+    if (introAlreadyPlayed && !forceIntro) {
         siteIntro.remove();
         document.body.classList.remove('intro-lock');
         return;
@@ -29,6 +31,20 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         siteIntro.remove();
     }, 5300);
+});
+
+window.addEventListener('load', () => {
+    const pageLoadFade = document.getElementById('pageLoadFade');
+
+    if (!pageLoadFade) return;
+
+    setTimeout(() => {
+        pageLoadFade.classList.add('fade-out');
+    }, 250);
+
+    setTimeout(() => {
+        pageLoadFade.remove();
+    }, 1100);
 });
 
 // ============================================
