@@ -3355,22 +3355,7 @@ body.intro-lock {
    FIX NAVBAR SHOWING DURING INTRO
    ============================================ */
 
-.site-intro {
-    z-index: 999999 !important;
-}
 
-body.intro-lock .navbar {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-}
-
-body.intro-lock .mobile-menu-panel,
-body.intro-lock .mobile-menu-btn {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-}
 /* ============================================
    FIX NAVBAR LOGO SIZE / PREVENT HUGE LOGO BUG
    ============================================ */
@@ -3459,24 +3444,6 @@ body.intro-lock .mobile-menu-btn {
 /* ============================================
    FINAL INTRO + MOBILE REVIEW BELT OVERRIDES
    ============================================ */
-
-.site-intro {
-    z-index: 999999 !important;
-}
-
-body.intro-lock .navbar,
-body.intro-lock .mobile-menu-btn,
-body.intro-lock .mobile-menu-panel {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-}
-
-.site-intro.hide-intro {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-}
 
 @media (max-width: 768px) {
     .reviews {
