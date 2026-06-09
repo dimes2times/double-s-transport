@@ -3355,7 +3355,22 @@ body.intro-lock {
    FIX NAVBAR SHOWING DURING INTRO
    ============================================ */
 
+.site-intro {
+    z-index: 999999 !important;
+}
 
+body.intro-lock .navbar {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+body.intro-lock .mobile-menu-panel,
+body.intro-lock .mobile-menu-btn {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
 /* ============================================
    FIX NAVBAR LOGO SIZE / PREVENT HUGE LOGO BUG
    ============================================ */
@@ -3445,6 +3460,24 @@ body.intro-lock {
    FINAL INTRO + MOBILE REVIEW BELT OVERRIDES
    ============================================ */
 
+.site-intro {
+    z-index: 999999 !important;
+}
+
+body.intro-lock .navbar,
+body.intro-lock .mobile-menu-btn,
+body.intro-lock .mobile-menu-panel {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+.site-intro.hide-intro {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
 @media (max-width: 768px) {
     .reviews {
         overflow: hidden !important;
@@ -3496,47 +3529,4 @@ body.intro-lock {
         min-width: 285px !important;
         max-width: 285px !important;
     }
-}
-/* ============================================
-   RESTORE INTRO + REFRESH FADE
-   ============================================ */
-
-.site-intro {
-    display: flex !important;
-    opacity: 1;
-    visibility: visible;
-    z-index: 999999 !important;
-}
-
-.site-intro.hide-intro {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-}
-
-body.intro-lock {
-    overflow: hidden !important;
-}
-
-body.intro-lock .navbar {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-}
-
-/* Soft refresh fade screen */
-.page-load-fade {
-    position: fixed;
-    inset: 0;
-    background: #050505;
-    z-index: 999998;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: none;
-    transition: opacity 0.75s ease, visibility 0.75s ease;
-}
-
-.page-load-fade.fade-out {
-    opacity: 0;
-    visibility: hidden;
 }
