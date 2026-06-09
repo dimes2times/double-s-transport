@@ -5,14 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Double S Transport - Premium Transportation in Turks & Caicos</title>
 
-
-    <!-- Prevent intro flash after it has already played in this session -->
-    <script>
-        if (sessionStorage.getItem('doubleSIntroPlayed')) {
-            document.documentElement.classList.add('intro-played');
-        }
-    </script>
-
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="apple-touch-icon" href="images/favicon.png">
@@ -35,26 +27,11 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>
-    (function () {
-        try {
-            const introKey = 'doubleSIntroPlayed_v3';
 
-            if (localStorage.getItem(introKey) === 'true') {
-                document.documentElement.classList.add('intro-done');
-            } else {
-                document.documentElement.classList.add('intro-pending');
-            }
-        } catch (error) {
-            document.documentElement.classList.add('intro-pending');
-        }
-    })();
-</script>
     <!-- Main CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="pageLoadFade" class="page-load-fade"></div>
 <!-- Premium Island Intro Animation -->
 <div id="siteIntro" class="site-intro">
     <div class="intro-bg-glow"></div>
@@ -319,14 +296,11 @@
                     <p>Luxury SUV and Private Taxi Service options.</p>
                 </div>
 
-           <div class="stat-card">
-    <div class="stat-line">
-        <span class="stat-number" data-target="5">0</span>
-        <span class="stat-suffix">★</span>
-    </div>
-    <h3>Premium Service</h3>
-    <p>Professional, comfortable, and reliable transportation from start to finish.</p>
-</div>
+                <div class="stat-card">
+                    <div class="stat-line"><span class="stat-number" data-target="5">0</span><span class="stat-suffix">★</span></div>
+                    <h3>Premium Service</h3>
+                    <p>Professional, comfortable, and reliable transportation from start to finish.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -436,9 +410,9 @@
                     <textarea id="reviewMessage" name="reviewMessage" placeholder="Tell us about your experience..." required></textarea>
                 </div>
 <div class="form-group">
-    <label for="reviewPhotos">Add Photos </label>
+    <label for="reviewPhotos">Add Photos Optional</label>
     <input type="file" id="reviewPhotos" name="reviewPhotos" accept="image/*" multiple>
-    <small class="photo-note">Optional. After submitting, WhatsApp will open so photos can be attached.</small>
+    <small class="photo-note">You can select photos from your experience. After submitting, WhatsApp will open so you can attach them.</small>
 </div>
                 <label class="review-consent">
     <input type="checkbox" id="reviewConsent" required>
@@ -672,6 +646,7 @@
 </a>
 
 <script src="script.js"></script>
+<script>
+</script>
 </body>
-
 </html>
