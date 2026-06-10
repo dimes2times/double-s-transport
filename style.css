@@ -3530,3 +3530,17 @@ body.intro-lock .mobile-menu-panel {
         max-width: 285px !important;
     }
 }
+.powered-by {
+    margin-top: 18px;
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    text-align: center;
+}
+
+.powered-by span {
+    color: #ffffff;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 1px;
+}
